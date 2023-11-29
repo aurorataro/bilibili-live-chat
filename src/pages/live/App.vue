@@ -37,7 +37,6 @@ export default defineComponent({
 
     const ready = ref(false);
     const errMsg = ref('');
-
     if (props.auth === 'open') {
       getOpenData(props.akId, props.akSecret, parseInt(props.appId), props.code)
         .then(data => {
@@ -58,7 +57,6 @@ export default defineComponent({
     } else {
       (async () => {
         const eMsg = [];
-
         // 获取房间信息
         const getRoomInfoSuccess = autoGet(`https://api.live.bilibili.com/room/v1/Room/room_init?id=${props.room}`)
           .then(({ code, msg, data: { room_id, uid } }) => {

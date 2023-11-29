@@ -39,18 +39,49 @@ export default {
     let failedTimestamps = [];
 
     const addInfoDanmaku = message => {
+      var rawMsg = message;
+      message = `[System] ${message}`;
       danmakuList.value.addDanmaku({
         type: 'info',
         message,
         stay: props.stay || 5000,
       });
+      if (props.tts) {
+        window.callOverlayHandler({ call: 'cactbotSay', text: rawMsg });
+      }
     };
     const addDanmaku = danmaku => {
-      if (props.limit) danmakuList.value.addSpeedLimitDanmaku(danmaku);
-      else danmakuList.value.addDanmaku(danmaku);
+      if (props.limit) {
+        danmakuList.value.addSpeedLimitDanmaku(danmaku);
+      } else {
+        danmakuList.value.addDanmaku(danmaku);
+      }
+
+      if (props.tts) {
+        switch (danmaku.type) {
+          case 'message':
+            window.callOverlayHandler({ call: 'cactbotSay', text: danmaku.message });
+            break;
+          case 'gift':
+            window.callOverlayHandler({
+              call: 'cactbotSay',
+              text: `${danmaku.uname} 送出 ${danmaku.num} 个 ${danmaku.giftName}`,
+            });
+            break;
+          case 'sc':
+            window.callOverlayHandler({
+              call: 'cactbotSay',
+              text: `${danmaku.uname} 的 SuperChat 说 ${danmaku.message}`,
+            });
+            break;
+        }
+      }
     };
 
     onMounted(() => {
+      if (props.tts) {
+        addInfoDanmaku('ACT TTS播报已开启');
+      }
       console.log('正在连接直播弹幕服务器', props.room);
       const live = new KeepLiveWS(props.room, props.liveWsOptions || { protover: 3, uid: 0 });
       live.interval = 1000;

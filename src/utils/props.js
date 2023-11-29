@@ -10,6 +10,7 @@ export const defaultProps = {
   room: '',
   cookie: '',
   cors: 'false',
+  tts: 'false',
   face: 'true',
   display: 'bottom',
   stay: '',
@@ -76,6 +77,16 @@ export const selectOptions = {
     {
       value: 'top',
       text: '从顶部',
+    },
+  ],
+  tts: [
+    {
+      value: 'false',
+      text: '关闭',
+    },
+    {
+      value: 'true',
+      text: '开启',
     },
   ],
 };

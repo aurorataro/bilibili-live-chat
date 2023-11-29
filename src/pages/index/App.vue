@@ -1,9 +1,11 @@
 <template>
   <div id="panel" class="panel panel-default" spellcheck="false">
     <div class="panel-heading">
-      <h2 class="panel-title" style="font-size: 30px; display: inline-block; margin-right: 10px">Bilibili Live Chat</h2>
+      <h2 class="panel-title" style="font-size: 30px; display: inline-block; margin-right: 10px">
+        Bilibili Live Chat FFXIV Version 2023.11.29
+      </h2>
       <iframe
-        src="https://ghbtns.com/github-btn.html?user=Tsuk1ko&amp;repo=bilibili-live-chat&amp;type=star&amp;count=true&amp;size=large"
+        src="https://ghbtns.com/github-btn.html?user=Small-Miao&amp;repo=bilibili-live-chat&amp;type=star&amp;count=true&amp;size=large"
         frameborder="0"
         scrolling="0"
         width="160px"
@@ -77,6 +79,11 @@
           <input class="form-control" type="text" placeholder="必填，直播间开播后可见" v-model="form.code" />
         </InputGroup>
       </template>
+      <InputGroup header="ACT TTS">
+        <select class="form-control" v-model="form.tts">
+          <option v-for="{ value, text } in options.tts" :key="value" :value="value">{{ text }}</option>
+        </select>
+      </InputGroup>
       <!-- 跨域模式 -->
       <InputGroup header="跨域模式">
         <select class="form-control" v-model="form.cors">
@@ -290,14 +297,17 @@ html {
   width: 100%;
   height: 100%;
 }
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 #app {
   margin: 16px;
 }
+
 @media screen and (min-width: 800px) {
   #app {
     width: 70%;
@@ -305,37 +315,47 @@ body {
     max-width: 1024px;
   }
 }
+
 @media screen and (max-width: 799px) {
   #app {
     width: 100%;
   }
 }
+
 #panel {
   margin: 0;
+
   .btn {
     float: right;
     margin-left: 8px;
   }
 }
+
 .btn {
   outline: none !important;
 }
+
 .form-control {
   box-shadow: none !important;
 }
+
 input[type='checkbox'] {
   vertical-align: middle;
 }
+
 label {
   margin-bottom: 0;
   font-weight: 400;
 }
+
 .input-group:not(:last-child) {
   margin-bottom: 10px;
 }
+
 .input-group-addon.front {
   min-width: 81px;
 }
+
 a {
   text-decoration: none !important;
 }
