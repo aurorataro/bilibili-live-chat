@@ -60,7 +60,10 @@ export default {
       if (props.tts) {
         switch (danmaku.type) {
           case 'message':
-            window.callOverlayHandler({ call: 'cactbotSay', text: danmaku.message });
+            window.callOverlayHandler({ 
+              call: 'cactbotSay', 
+              text: `${danmaku.uname} 说 $(danmaku.message)`,
+             });
             break;
           case 'gift':
             window.callOverlayHandler({
